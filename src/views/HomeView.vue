@@ -1,18 +1,30 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <p v-for="data in getData" :key="data.siteId">
+      {{data.price}}
+    </p>
   </div>
+
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+  computed:{
+    getData(){
+      return this.$store.state.data || []
+    }
+  },
+  methods:{
+    getdata(){
+      this.$store.dispatch('fetchData')
+    }
+  },
+  mounted() {
+  this.getdata()
+}
+
+
 }
 </script>
